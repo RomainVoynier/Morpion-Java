@@ -1,0 +1,95 @@
+:root {
+	--board-size: 360px;
+	--line-width: 8px;
+	--x-color: #e74c3c;
+	--o-color: #3498db;
+	--cell-bg: #ffffff;
+	--cell-hover: #f7f7f7;
+}
+
+* { box-sizing: border-box; }
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	padding: 24px;
+	font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+.board {
+	width: var(--board-size);
+	height: var(--board-size);
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	background: #222;
+	padding: calc(var(--line-width) / 2);
+	gap: 0;
+	border-radius: 8px;
+}
+
+.cell {
+	position: relative;
+	background: var(--cell-bg);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	user-select: none;
+	transition: background 120ms ease;
+}
+.cell:hover { background: var(--cell-hover); }
+
+/* draw the thick separators by using :before on the board and hiding outer borders */
+.board::before {
+	content: '';
+	position: absolute;
+}
+
+/* Piece base */
+.piece {
+	width: 72%;
+	height: 72%;
+	display: block;
+	position: relative;
+}
+
+/* X piece: two crossing bars */
+.cell.x .piece::before,
+.cell.x .piece::after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 100%;
+	height: 12px;
+	background: var(--x-color);
+	border-radius: 6px;
+	transform-origin: center;
+}
+.cell.x .piece::before { transform: translate(-50%, -50%) rotate(45deg); }
+.cell.x .piece::after  { transform: translate(-50%, -50%) rotate(-45deg); }
+
+/* O piece: circular ring */
+.cell.o .piece {
+	border: 12px solid var(--o-color);
+	border-radius: 50%;
+	background: transparent;
+}
+
+/* Board separators using cell borders */
+.cell { border-right: calc(var(--line-width) / 2) solid #222; border-bottom: calc(var(--line-width) / 2) solid #222; }
+.cell:nth-child(3n) { border-right: none; }
+.cell:nth-last-child(-n+3) { border-bottom: none; }
+
+.controls { display:flex; gap:8px; align-items:center; }
+.btn { padding:8px 12px; border-radius:6px; border:1px solid #ccc; background:#fff; cursor:pointer; }
+.btn:active { transform: translateY(1px); }
+
+/* Responsive smaller boards */
+@media (max-width:420px) {
+	:root { --board-size: 320px; }
+}
+
