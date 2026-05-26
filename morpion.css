@@ -84,7 +84,21 @@
 .cell:nth-child(3n) { border-right: none; }
 .cell:nth-last-child(-n+3) { border-bottom: none; }
 
-.controls { display:flex; gap:8px; align-items:center; }
+..controls { display:flex; gap:8px; align-items:center; }
+.scoreboard {
+	display: flex;
+	gap: 16px;
+	justify-content: center;
+	flex-wrap: wrap;
+	font-weight: 600;
+	color: #333;
+}
+.scoreboard div {
+	background: #f9f9f9;
+	padding: 8px 12px;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+}
 .btn { padding:8px 12px; border-radius:6px; border:1px solid #ccc; background:#fff; cursor:pointer; }
 .btn:active { transform: translateY(1px); }
 
