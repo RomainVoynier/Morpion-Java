@@ -1,9 +1,5 @@
-/**
- * Classe pour gérer les résultats du jeu Morpion
- */
 public class Result {
     
-    // Énumération des types de résultats
     public enum ResultType {
         VICTOIRE_1("Victoire du joueur 1"),
         VICTOIRE_2("Victoire du joueur 2"),
@@ -25,11 +21,6 @@ public class Result {
     private String details;
     private long timestamp;
     
-    /**
-     * Constructeur pour créer un résultat
-     * @param type Le type de résultat
-     * @param joueur Le joueur gagnant (null pour match nul)
-     */
     public Result(ResultType type, String joueur) {
         this.type = type;
         this.joueur = joueur;
@@ -37,9 +28,6 @@ public class Result {
         this.details = genererDetails();
     }
     
-    /**
-     * Génère une description détaillée du résultat
-     */
     private String genererDetails() {
         switch(type) {
             case VICTOIRE_1:
@@ -53,30 +41,18 @@ public class Result {
         }
     }
     
-    /**
-     * Retourne le message du résultat
-     */
     public String obtenirMessage() {
         return type.getMessage();
     }
     
-    /**
-     * Retourne les détails du résultat
-     */
     public String obtenirDetails() {
         return details;
     }
     
-    /**
-     * Retourne le type de résultat
-     */
     public ResultType obtenirType() {
         return type;
     }
     
-    /**
-     * Retourne le joueur gagnant
-     */
     public String obtenirJoueur() {
         return joueur;
     }
@@ -88,9 +64,6 @@ public class Result {
         return timestamp;
     }
     
-    /**
-     * Affiche le résultat complet
-     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -106,30 +79,19 @@ public class Result {
         return sb.toString();
     }
     
-    /**
-     * Affiche le résultat dans la console
-     */
     public void afficherResultat() {
         System.out.println(this.toString());
     }
     
-    /**
-     * Exemple d'utilisation
-     */
     public static void main(String[] args) {
-        // Exemple de résultat: Victoire du joueur 1
         Result resultat1 = new Result(ResultType.VICTOIRE_1, "1");
         resultat1.afficherResultat();
         
         System.out.println("\n");
-        
-        // Exemple de résultat: Match nul
         Result resultat2 = new Result(ResultType.MATCH_NUL, null);
         resultat2.afficherResultat();
         
         System.out.println("\n");
-        
-        // Exemple de résultat: Victoire du joueur 2
         Result resultat3 = new Result(ResultType.VICTOIRE_2, "2");
         resultat3.afficherResultat();
     }
